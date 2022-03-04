@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+    id "io.qameta.allure" version "2.9.6"
+}
+
+repositories {
+    mavenCentral()
+}
+
+def restAssured = "4.4.0",
+    junitVersion = "5.8.2"
+
+
+dependencies {
+    testImplementation(
+            "com.fasterxml.jackson.core:jackson-databind:2.13.1",
+            "io.rest-assured:rest-assured:$restAssured",
+            "com.codeborne:selenide:6.2.1",
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",)
+    testRuntimeOnly(
+            "org.slf4j:slf4j-simple:1.7.29",
+            "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
