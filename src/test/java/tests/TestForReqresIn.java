@@ -1,5 +1,8 @@
 package tests;
 
+import models.User;
+import models.UserData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -7,21 +10,19 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class TestForReqresIn {
 
-//    @Test
-//    void testGetListUsers() {
-//        ArrayList<Response> listUsersData = given()
-//                .when()
-//                .get("https://reqres.in/api/users?page=2")
-//                .then()
-//                .statusCode(200)
-//                .extract().path("data");
-//
-//        for (Response response: listUsersData) {
-//            response
-//                    .then()
-//                    .body("email", Matchers.not("michael.lawson@reqres.in"));
-//        }
-//    }
+    @Test
+    void testGetAllListUsers() {
+        UserData userData = given()
+                .when()
+                .get("https://reqres.in/api/users?page=2")
+                .then()
+                .statusCode(200)
+                .extract().body().as(UserData.class);
+
+        for (User user: userData.getData()) {
+            Assertions.assertNotNull(user.getEmail());
+        }
+    }
 
     @Test
     void testGetListUsers() {
