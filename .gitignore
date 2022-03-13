@@ -18,11 +18,23 @@
 *.zip
 *.tar.gz
 *.rar
+*.iml
 
-build
-.gradle
+# Project gen files
 .idea
-!gradle
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.allure/
+.gradle/
+allure-results/
+gradle/
+build/
+bin/
+out/
+logs/
+target/
+.classpath
+.project
+.settings/org.eclipse.buildship.core.prefs
+.vscode
+/gradlew
+/gradlew.bat
+*.properties
